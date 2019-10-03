@@ -23,14 +23,12 @@ def generate_array(regions, reflen):
 
 def intersperse(data, linelen, sep='\n'):
     ret = list()
-
-    for x in range(0, (len(data) // linelen) + 1):
+    lines = (len(data) // linelen) + 1
+    for x in range(0, lines-1):
         ret.append(data[x*linelen:(x+1)*linelen] + sep)
+    ret.append(data[(lines - 1)*linelen:])
     return ''.join(ret)
 
-print('-')
-print(intersperse('00000000000000000000000000000000', 10))
-print('-')
 def main():
     '''
     Generate mask array file based on repetitive region (bed file), in the following format:
