@@ -51,7 +51,7 @@ process indexReference {
     bgzip -c ${refFasta}.rpt.regions > ${refFasta.baseName}.rpt_mask.gz
 	echo '##INFO=<ID=RPT,Number=1,Type=Integer,Description="Flag for variant in repetitive region">' > ${refFasta.baseName}.rpt_mask.hdr
 	tabix -s1 -b2 -e3 ${refFasta.baseName}.rpt_mask.gz
-    genRefArray.py -g ${refFasta}.rpt.regions -r $refFasta
+    genRefArray.py -g ${refFasta}.rpt.regions -r $refFasta > ${refFasta.baseName}_repmask.array
     """
 }
 

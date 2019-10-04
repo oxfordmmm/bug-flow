@@ -3,6 +3,9 @@
 import sys
 import argparse
 
+def get_fasta_header(reflines):
+    return reflines[0]
+
 def load_reference(reflines):
     reference = [x.strip() for x in reflines if x and x[0] not in ['>']]
     reference = ''.join(reference)
@@ -59,12 +62,15 @@ def main():
     regions = load_regions(regionlines)
        
     reflines = open(args.reference).readlines()
+    fasta_header = get_fasta_header(reflines)
     reference = load_reference(reflines)
 
     mask = generate_array(regions, len(reference))
 
-    intersperse(mask, 100, '\n')
-
+    genome = intersperse(mask, 100, '\n')    
+    
+    sys.stdout.write(fasta_header)
+    sys.stdout.write(genome)
 
 if __name__ == "__main__":
     main()
